@@ -2924,11 +2924,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\KAnde1\\Documents\\GitHub projects\\TicTacToeWeb\\TicTacToeWeb.csproj",
+      "projectUniqueName": "C:\\Users\\KAnde1\\Documents\\GitHub projects\\Week5\\TicTacToeWeb\\TicTacToeWeb.csproj",
       "projectName": "TicTacToeWeb",
-      "projectPath": "C:\\Users\\KAnde1\\Documents\\GitHub projects\\TicTacToeWeb\\TicTacToeWeb.csproj",
+      "projectPath": "C:\\Users\\KAnde1\\Documents\\GitHub projects\\Week5\\TicTacToeWeb\\TicTacToeWeb.csproj",
       "packagesPath": "C:\\Users\\KAnde1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\KAnde1\\Documents\\GitHub projects\\TicTacToeWeb\\obj\\",
+      "outputPath": "C:\\Users\\KAnde1\\Documents\\GitHub projects\\Week5\\TicTacToeWeb\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\KAnde1\\AppData\\Roaming\\NuGet\\NuGet.Config",

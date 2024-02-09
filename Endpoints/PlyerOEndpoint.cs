@@ -14,10 +14,20 @@ namespace TicTacToeWeb.Endpoints
         [ProducesResponseType(StatusCodes.Status200OK)]
         public static async Task<IResult> AddMarkerO(IRepository repository, int space)
         {
-            string[]? board = await repository.AddO(space);
+            //Checking the board
+            if (await repository.BoardExists() == false)
+                return Results.BadRequest("Must initialize the board first");
+
+            //Checking turn
+            if (await repository.PlayerTurn('O') == false)
+                return Results.BadRequest("Not your turn");
+
+            //Checking index
+            string[]? board = await repository.AddMarker("O", space);
             if (board == null)
                 return Results.BadRequest("Can't put marker there!");
 
+            //Checking win condition
             bool haveWon = await repository.HaveWon(space);
             if (haveWon)
                 return TypedResults.Ok("CONGRATULATIONS PLAYER! YOU HAVE WON!");

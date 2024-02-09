@@ -22,6 +22,10 @@ namespace TicTacToeWeb.Endpoints
         [ProducesResponseType(StatusCodes.Status200OK)]
         public static async Task<IResult> GetBoard(IRepository repository)
         {
+            //Checking the board
+            if (await repository.BoardExists() == false)
+                return Results.BadRequest("Must initialize the board first");
+
             Board? board = await repository.GetBoard();
             if (board == null)
                 return Results.BadRequest("There is no board");

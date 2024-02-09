@@ -11,6 +11,7 @@ namespace TicTacToeWeb.Repository
         private int index = 0;
         bool haveWon = false;
         char mark = ' ';
+        Board board;
 
         public Repository(DataContext db)
         {
@@ -19,7 +20,11 @@ namespace TicTacToeWeb.Repository
 
         public async Task<string[]> CreateBoard()
         {
-            Board board = new Board();
+            //If the board is already initialized
+            if (board != null)
+                return board.Spaces;
+
+            board = new Board();
             await dataContext.AddAsync(board);
             await dataContext.SaveChangesAsync();
             return board.Spaces;
@@ -30,34 +35,42 @@ namespace TicTacToeWeb.Repository
             return await dataContext.Board.FirstAsync();
         }
 
-        public async Task<string[]?> AddO(int space)
+        public async Task<bool> BoardExists()
         {
-            Board board = await dataContext.Board.FirstAsync();
-            if (board == null)
-                return null;
-
-            CheckBoard(space);
-
-            if (spot == 0)
-                return null;
-
-            if (board.Spaces[index][spot] == 'O' || board.Spaces[index][spot] == 'X')
-                return null;
-
-            board.Spaces[index] = board.Spaces[index].Insert(spot, "O");
-            board.Spaces[index] = board.Spaces[index].Remove(spot + 1, 1);
-            mark = 'O';
-
-            await dataContext.SaveChangesAsync();
-            return board.Spaces;
+            return await dataContext.Board.CountAsync() > 0;
         }
 
-        public async Task<string[]?> AddX(int space)
+        public async Task<bool> PlayerTurn(char marker)
         {
-            Board board = await dataContext.Board.FirstAsync();
-            if (board == null)
-                return null;
+            board = await dataContext.Board.FirstAsync();
+            mark = marker;
+            int nrOs = 0;
+            int nrXs = 0;
+            bool myTurn = true;
 
+            //Checking how many Os and Xs there are
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 1; j < 10; j += 4)
+                {
+                    if (board.Spaces[i][j] == 'O')
+                        nrOs++;
+                    else if (board.Spaces[i][j] == 'X')
+                        nrXs++;
+                }
+            }
+
+            //Checking if the same player is trying to add a marker
+            if (nrOs > nrXs && marker == 'O')
+                myTurn = false;
+            else if (nrXs > nrOs && marker == 'X')
+                myTurn = false;
+            
+            return myTurn;
+        }
+
+        public async Task<string[]?> AddMarker(string marker, int space)
+        {
             CheckBoard(space);
 
             if (spot == 0)
@@ -66,10 +79,8 @@ namespace TicTacToeWeb.Repository
             if (board.Spaces[index][spot] == 'O' || board.Spaces[index][spot] == 'X')
                 return null;
 
-            board.Spaces[index] = board.Spaces[index].Insert(spot, "X");
+            board.Spaces[index] = board.Spaces[index].Insert(spot, marker);
             board.Spaces[index] = board.Spaces[index].Remove(spot + 1, 1);
-            mark = 'X';
-
             await dataContext.SaveChangesAsync();
             return board.Spaces;
         }
@@ -127,8 +138,6 @@ namespace TicTacToeWeb.Repository
 
         public async Task<bool> HaveWon(int space)
         {
-            Board board = await dataContext.Board.FirstAsync();
-
             //Checking the rows
             if (spot == 1)
             {
@@ -162,6 +171,7 @@ namespace TicTacToeWeb.Repository
                 if (board.Spaces[0][spot] == mark && board.Spaces[1][spot] == mark)
                     return true;
             }
+
             return false;
         }
     }

@@ -27,6 +27,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.ConfigureGameEndpoint();
-app.ConfigurePlayerXEndpoint();
 app.ConfigurePlayerOEndpoint();
+app.ConfigurePlayerXEndpoint();
 app.Run();

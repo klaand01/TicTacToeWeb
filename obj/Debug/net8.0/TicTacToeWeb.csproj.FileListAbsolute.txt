@@ -212,3 +212,4 @@ C:\Users\KAnde1\Documents\GitHub projects\TicTacToeWeb\obj\Debug\net8.0\refint\T
 C:\Users\KAnde1\Documents\GitHub projects\TicTacToeWeb\obj\Debug\net8.0\TicTacToeWeb.pdb
 C:\Users\KAnde1\Documents\GitHub projects\TicTacToeWeb\obj\Debug\net8.0\TicTacToeWeb.genruntimeconfig.cache
 C:\Users\KAnde1\Documents\GitHub projects\TicTacToeWeb\obj\Debug\net8.0\ref\TicTacToeWeb.dll
+C:\Users\KAnde1\Documents\GitHub projects\Week5\TicTacToeWeb\obj\Debug\net8.0\TicTacToeWeb.sourcelink.json

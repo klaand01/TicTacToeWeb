@@ -6,9 +6,9 @@ namespace TicTacToeWeb.Repository
     {
         Task<string[]> CreateBoard();
         Task<Board?> GetBoard();
+        Task<bool> BoardExists();
         Task<bool> HaveWon(int space);
-
-        Task<string[]?> AddO(int space);
-        Task<string[]?> AddX(int space);
+        Task<bool> PlayerTurn(char marker);
+        Task<string[]?> AddMarker(string marker, int space);
     }
 }
