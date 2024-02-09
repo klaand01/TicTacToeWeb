@@ -28,8 +28,7 @@ namespace TicTacToeWeb.Endpoints
                 return Results.BadRequest("Can't put marker there!");
 
             //Checking win condition
-            bool haveWon = await repository.HaveWon(space);
-            if (haveWon)
+            if (await repository.HaveWon(space))
                 return TypedResults.Ok("CONGRATULATIONS PLAYER! YOU HAVE WON!");
 
             return TypedResults.Ok(board);

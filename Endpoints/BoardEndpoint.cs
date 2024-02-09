@@ -10,6 +10,7 @@ namespace TicTacToeWeb.Endpoints
         {
             var boardGroup = app.MapGroup("board");
             boardGroup.MapGet("/newboard", CreateBoard);
+            boardGroup.MapGet("/cleanboard", CleanBoard);
             boardGroup.MapGet("/", GetBoard);
         }
 
@@ -17,6 +18,12 @@ namespace TicTacToeWeb.Endpoints
         public static async Task<IResult> CreateBoard(IRepository repository)
         {
             return TypedResults.Ok(repository.CreateBoard());
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public static async Task<IResult> CleanBoard(IRepository repository)
+        {
+            return TypedResults.Ok(repository.CleanBoard());
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]

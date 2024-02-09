@@ -5,6 +5,7 @@ namespace TicTacToeWeb.Repository
     public interface IRepository
     {
         Task<string[]> CreateBoard();
+        Task<string[]> CleanBoard();
         Task<Board?> GetBoard();
         Task<bool> BoardExists();
         Task<bool> HaveWon(int space);

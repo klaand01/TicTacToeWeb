@@ -30,6 +30,15 @@ namespace TicTacToeWeb.Repository
             return board.Spaces;
         }
 
+        public async Task<string[]> CleanBoard()
+        {
+            Board newBoard = new Board();
+            await dataContext.AddAsync(newBoard);
+            dataContext.Board.Remove(await dataContext.Board.FirstAsync());
+            await dataContext.SaveChangesAsync();
+            return newBoard.Spaces;
+        }
+
         public async Task<Board?> GetBoard()
         {
             return await dataContext.Board.FirstAsync();
